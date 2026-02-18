@@ -1,0 +1,11 @@
+package ast.statements;
+
+import ast.expressions.Expression;
+import ast.locatable.AbstractLocatable;
+
+import java.util.List;
+
+public class IfStatement extends AbstractLocatable implements Statement{
+    Expression condition;
+    List<Statement> body;
+}
