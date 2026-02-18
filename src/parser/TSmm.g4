@@ -1,7 +1,19 @@
 grammar TSmm;	
 
-program: INT_CONSTANT+
+program: expression EOF
        ;
+
+expression: INT_CONSTANT
+    | ID
+    | '(' expression ')'
+    | '[' expression ']'
+    | ID '.' expression
+    | expression ('+'|'-') expression
+    | expression ('>'|'>='|'<'|'<='|'!='|'==')
+    ;
+
+
+//-------LEXER------------
 
 //------------------------ CTRL+SHIFT+G
 
@@ -38,3 +50,5 @@ CHAR_CONSTANT: '\'' . '\''
 ID : [a-zA-Z_]+ [a-zA-Z_0-9]*
     ;
 
+
+//--------------------------------------------------
