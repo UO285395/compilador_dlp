@@ -5,6 +5,12 @@ import ast.locatable.AbstractLocatable;
 public class ArrayAccess extends AbstractLocatable implements Expression {
     Expression array, index;
 
+    public ArrayAccess(int line, int column, Expression array, Expression index) {
+        super(line, column);
+        this.array = array;
+        this.index = index;
+    }
+
     public Expression getArray() {
         return array;
     }

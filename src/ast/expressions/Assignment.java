@@ -6,6 +6,10 @@ public class Assignment extends AbstractLocatable implements Expression {
     Variable variable;
     Expression expression;
 
+    public Assignment(int line, int column) {
+        super(line, column);
+    }
+
     public Variable getVariable() {
         return variable;
     }

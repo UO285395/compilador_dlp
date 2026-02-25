@@ -11,6 +11,10 @@ public class FuncDefinition extends AbstractLocatable implements Definition {
     Type type;
     List<Statement> statements;
 
+    public FuncDefinition(int line, int column) {
+        super(line, column);
+    }
+
     @Override
     public String getName() {
         return name;

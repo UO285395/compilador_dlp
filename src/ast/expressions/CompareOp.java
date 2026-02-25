@@ -6,6 +6,13 @@ public class CompareOp extends AbstractLocatable implements Expression {
     Expression left, right;
     String operator;
 
+    public CompareOp(int line, int column, Expression left, String op, Expression right) {
+        super(line, column);
+        this.left = left;
+        this.operator = op;
+        this.right = right;
+    }
+
     public Expression getLeft() {
         return left;
     }

@@ -7,6 +7,10 @@ public class Invocation extends AbstractLocatable implements Expression, Stateme
     Expression function;
     Expression arguments;
 
+    public Invocation(int line, int column) {
+        super(line, column);
+    }
+
     public Expression getFunction() {
         return function;
     }

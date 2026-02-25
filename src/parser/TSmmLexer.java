@@ -1,5 +1,13 @@
-// Generated from C:/Users/34658/Documents/Clase/DLPLab2526/dlp/src/parser/TSmm.g4 by ANTLR 4.13.2
+// Generated from C:/Users/uo285395/IdeaProjects/compilador_dlp/src/parser/TSmm.g4 by ANTLR 4.13.2
 package parser;
+
+    import ast.*;
+    import ast.definitions.*;
+    import ast.expressions.*;
+    import ast.locatable.*;
+    import ast.statements.*;
+    import ast.types.*;
+
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

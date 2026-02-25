@@ -6,6 +6,13 @@ public class ArithmeticOp extends AbstractLocatable implements Expression {
     Expression left, right;
     String operator;
 
+    public ArithmeticOp(int line, int column, Expression left, String operator, Expression right) {
+        super(line, column);
+        this.left = left;
+        this.operator = operator;
+        this.right = right;
+    }
+
     public Expression getLeft() {
         return left;
     }

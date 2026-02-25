@@ -8,4 +8,8 @@ import java.util.List;
 public class IfStatement extends AbstractLocatable implements Statement{
     Expression condition;
     List<Statement> body;
+
+    public IfStatement(int line, int column) {
+        super(line, column);
+    }
 }

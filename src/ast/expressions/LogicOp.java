@@ -6,6 +6,10 @@ public class LogicOp extends AbstractLocatable implements Expression {
     Expression left, right;
     String operator;
 
+    public LogicOp(int line, int column) {
+        super(line, column);
+    }
+
     public Expression getLeft() {
         return left;
     }

@@ -2,18 +2,12 @@ package ast.expressions;
 
 import ast.locatable.AbstractLocatable;
 
-import java.util.function.UnaryOperator;
-
 public class UnaryMinus extends AbstractLocatable  implements Expression{
-    String operator;
     Expression expression;
 
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
+    public UnaryMinus(int line, int column, Expression expression) {
+        super(line, column);
+        this.expression = expression;
     }
 
     public Expression getExpression() {
