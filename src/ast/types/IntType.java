@@ -1,8 +1,16 @@
 package ast.types;
 
+import ast.locatable.AbstractLocatable;
+import ast.types.Type;
+
 public class IntType implements Type {
-    //Singleton
+    private static final IntType INSTANCE = new IntType();
 
+    private IntType() {
+        super();
+    }
 
-    private IntType() {}
+    public static IntType getInstance() {
+        return INSTANCE;
+    }
 }

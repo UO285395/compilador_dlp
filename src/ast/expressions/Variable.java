@@ -10,4 +10,5 @@ public class Variable extends AbstractLocatable implements Expression {
         super(line, column);
         this.name = name;
     }
+
 }

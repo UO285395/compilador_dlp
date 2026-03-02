@@ -3,27 +3,23 @@ package ast.expressions;
 import ast.locatable.AbstractLocatable;
 import ast.statements.Statement;
 
+import java.util.List;
+
 public class Invocation extends AbstractLocatable implements Expression, Statement {
-    Expression function;
-    Expression arguments;
+    Variable invoked;
+    List<Expression> arguments;
 
-    public Invocation(int line, int column) {
+    public Invocation(int line, int column, Variable invoked, List<Expression> arguments) {
         super(line, column);
-    }
-
-    public Expression getFunction() {
-        return function;
-    }
-
-    public void setFunction(Expression function) {
-        this.function = function;
-    }
-
-    public Expression getArguments() {
-        return arguments;
-    }
-
-    public void setArguments(Expression arguments) {
+        this.invoked = invoked;
         this.arguments = arguments;
     }
+
+    public Invocation(int line, int column, Variable invoked) {
+        super(line, column);
+        this.invoked = invoked;
+    }
+
+
+
 }

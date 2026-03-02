@@ -1,1 +1,4 @@
-vector[9] + (5.3);
+function main(): void{
+  	(54+3).character.getName.paco = '0';
+
+}

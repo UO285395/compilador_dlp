@@ -1,4 +1,5 @@
 import ast.Program;
+import ast.definitions.FuncDefinition;
 import ast.expressions.Expression;
 import parser.*;
 
@@ -22,7 +23,7 @@ public class Main {
 		// create a parser that feeds off the tokens buffer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); 
 		TSmmParser parser = new TSmmParser(tokens);
-		Expression ast = parser.expression().ast;
+		Program ast = parser.program().ast;
 		
 		// * The AST is shown
 		IntrospectorModel model=new IntrospectorModel("Program", ast);
