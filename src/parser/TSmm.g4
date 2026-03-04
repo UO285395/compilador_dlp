@@ -47,7 +47,7 @@ statement returns [Statement ast]:  'log' args ';' {$ast = new Log($args.ast.get
     | 'input' args ';' {$ast = new Input($args.ast.getFirst().getLine(), $args.ast.getFirst().getColumn(), $args.ast);}
     | e1=expression '=' e2=expression ';' {$ast = new Assignment($e1.ast.getLine(), $e1.ast.getColumn(), $e1.ast, $e2.ast);}
     | 'if' '(' expression ')' i1=ifBlock 'else' i2=ifBlock {$ast = new IfStatement($expression.ast.getLine(), $expression.ast.getColumn(), $expression.ast, $i1.ast, $i2.ast);}
-    | 'if' '(' expression ')' i1=ifBlock {$ast = new IfStatement($expression.ast.getLine(), $expression.ast.getColumn(), $expression.ast, $i1.ast);}
+    | 'if' '(' expression ')' i1=ifBlock {$ast = new IfStatement($expression.ast.getLine(), $expression.ast.getColumn(), $expression.ast, $i1.ast, new ArrayList<>());}
     | 'while' '(' expression ')' ifBlock {$ast = new WhileStatement($expression.ast.getLine(), $expression.ast.getColumn(), $expression.ast, $ifBlock.ast);}
     | 'return' expression ';' {$ast = new Return($expression.ast.getLine(), $expression.ast.getColumn(), $expression.ast);}
     | ID '(' args ')' ';'  {$ast = new Invocation($ID.getLine(), $ID.getCharPositionInLine() + 1, new Variable($ID.getLine(), $ID.getCharPositionInLine() + 1, $ID.text), $args.ast);}
@@ -61,7 +61,8 @@ ifBlock returns [List<Statement> ast = new ArrayList<>()]: statement {$ast.add($
 type returns [Type ast]:
  t=primitive_type {$ast = $t.ast;}
     | '[' INT_CONSTANT ']' type {$ast = new ArrayType($INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine() + 1, LexerHelper.lexemeToInt($INT_CONSTANT.text), $type.ast);}
-    | '[' r=recordFields  ']' {$ast = new RecordType($r.ast.getFirst().getLine(),$r.ast.getFirst().getColumn(), $r.ast);}
+    | '[' r=recordFields  ']'
+    {$ast = new RecordType($r.ast.getFirst().getLine(),$r.ast.getFirst().getColumn(), $r.ast);}
     ;
 
 primitive_type returns [Type ast]: 'char' {$ast = CharType.getInstance();}
@@ -85,9 +86,21 @@ recordFields returns [List<RecordField> ast = new ArrayList<>()]
     ;
 
 varDefinitions returns [List<VarDefinition> ast = new ArrayList<>()]
-    : 'let' ids+=ID (',' ids+=ID)* ':' t=type ';'
+    :{List<String> bucle = new ArrayList<>();}
+     'let' ids+=ID {bucle.add($ID.text);} (',' ids+=ID {bucle.add($ID.text);} )* ':' t=type ';'
+
     {
         for (int k = 0; k < $ids.size(); k++) {
+        if(bucle.contains($ids.get(k).getText()) && bucle.get(k)!=$ids.get(k).getText()){
+            $ast.add(
+                            new VarDefinition(
+                                $ids.get(k).getLine(),
+                                $ids.get(k).getCharPositionInLine() + 1,
+                                $ids.get(k).getText(),
+                                new ErrorType()
+                            )
+                        );
+        }   else{
             $ast.add(
                 new VarDefinition(
                     $ids.get(k).getLine(),
@@ -96,6 +109,7 @@ varDefinitions returns [List<VarDefinition> ast = new ArrayList<>()]
                     $t.ast
                 )
             );
+            }
         }
     }
 ;

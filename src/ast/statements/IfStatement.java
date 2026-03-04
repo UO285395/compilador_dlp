@@ -17,9 +17,4 @@ public class IfStatement extends AbstractLocatable implements Statement{
         this.bodyElse = bodyElse;
     }
 
-    public IfStatement(int line, int column, Expression condition, List<Statement> body) {
-        super(line, column);
-        this.condition = condition;
-        this.body = body;
-    }
 }
